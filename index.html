@@ -21,12 +21,14 @@
 
     body {
       margin: 0;
-      min-height: 100svh;
+      min-height: 100dvh;              /* better on mobile than 100vh */
       display: grid;
       place-items: center;
       background: radial-gradient(circle at top, var(--bg2), var(--bg1));
       font-family: system-ui, sans-serif;
-      overflow: hidden;
+    
+      overflow-x: hidden;              /* keep confetti clean */
+      overflow-y: auto;                /* <-- allow scrolling */
       padding: 16px;
     }
 
@@ -48,7 +50,11 @@
       border-radius: 22px;
       text-align: center;
       box-shadow: 0 18px 60px rgba(0,0,0,.15);
+    
+      max-height: calc(100dvh - 32px); /* viewport minus body padding */
+      overflow: auto;                 /* scroll inside card if needed */
     }
+
 
     .art {
       width: min(260px, 80vw);
@@ -118,9 +124,13 @@
 
     .fireworks {
       width: min(380px, 90vw);
+      height: auto;
+      max-height: 45dvh;   /* cap height so it fits */
+      object-fit: contain;
       margin: 0 auto;
       display: block;
     }
+
 
     @keyframes pop {
       from { transform: scale(.96); opacity: 0; }
@@ -300,6 +310,7 @@
   </script>
 </body>
 </html>
+
 
 
 
